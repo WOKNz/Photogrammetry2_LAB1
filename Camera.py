@@ -1,9 +1,9 @@
-
 import numpy as np
+
 
 class Camera(object):
 
-    def __init__(self, focal_length, principal_point, radial_distortions, decentering_distortions, fiducial_marks):
+    def __init__(self, focal_length, principal_point, radial_distortions, decentering_distortions, fiducial_marks, sensorSize):
         """
         Initialize the Camera object
 
@@ -12,12 +12,14 @@ class Camera(object):
         :param radial_distortions: the radial distortion parameters K0, K1, K2
         :param decentering_distortions: decentering distortion parameters P0, P1, P2
         :param fiducial_marks: fiducial marks in camera space
+        :param sensorSize: size of sensor
 
         :type focal_length: double
         :type principal_point: np.array
         :type radial_distortions: np.array
         :type decentering_distortions: np.array
         :type fiducial_marks: np.array
+        :type sensorSize: double
 
         """
         # private parameters
@@ -27,6 +29,7 @@ class Camera(object):
         self.__decentering_distortions = decentering_distortions
         self.__fiducial_marks = fiducial_marks
         self.__CalibrationParam = None
+        self.__sensorSize = sensorSize
 
     @property
     def focalLength(self):
@@ -172,6 +175,20 @@ class Camera(object):
         """
 
         pass  # Delete for implementation
+
+    def cameraSysCorners(self):
+        """
+        sensor size in mm
+        camera system corners of the sensor
+        :return:
+        """
+        sens = self.__sensorSize
+        a = [sens / 2, -sens / 2, -self.focalLength]
+        b = [-sens / 2, -sens / 2, -self.focalLength]
+        c = [-sens / 2, sens / 2, -self.focalLength]
+        d = [sens / 2, sens / 2, -self.focalLength]
+
+        return np.array([a,b,c,d])
 
 
 
