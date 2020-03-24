@@ -580,7 +580,18 @@ class SingleImage(object):
 
         return groundPoints
 
+    def castSize(self,z=None):
+        """
+        calculates area of the footprint on the ground
+        focalLength and sensorsize in mm
+        :param z: diffrent hight from Z (for example at top of the square) (m)
+        :return: area in mm2 of FOV footprint
+        """
 
+        if z == None:
+            return ((self.exteriorOrientationParameters[2]/self.camera.focalLength*0.001)*self.camera.sensorSize*0.001)
+        else:
+            return ((z / self.camera.focalLength * 0.001) * self.camera.sensorSize * 0.001)
 
 
     # ---------------------- Private methods ----------------------

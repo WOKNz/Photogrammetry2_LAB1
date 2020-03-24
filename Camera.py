@@ -82,6 +82,18 @@ class Camera(object):
 
         return self.__principal_point
 
+    @property
+    def sensorSize(self):
+        """
+        Focal length of the camera
+
+        :return: focal length
+
+        :rtype: float
+
+        """
+        return self.__sensorSize
+
     def CameraToIdealCamera(self, camera_points):
         """
         Transform camera coordinates to an ideal system.
