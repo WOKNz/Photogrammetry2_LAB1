@@ -22,7 +22,7 @@ def cubeCorners(edgeSize):
 
     return np.array([a, b, c, d, e, f, g, h])
 
-
+"""
 fig_orthographic = plt.figure()
 ax = fig_orthographic.add_subplot(111, projection='3d')
 corners = cubeCorners(5)
@@ -34,9 +34,9 @@ side4 = np.vstack((corners[1, :], corners[5, :]))
 side5 = np.vstack((corners[2, :], corners[6, :]))
 side6 = np.vstack((corners[3, :], corners[7, :]))
 
-ax.scatter(corners[:, 0], corners[:, 1], corners[:, 2], c='r')
-ax.plot(corners[0:4, 0], corners[0:4, 1], corners[0:4, 2], c='r')
-ax.plot(corners[4:8, 0], corners[4:8, 1], corners[4:8, 2], c='r')
+ax.scatter(corners[:, 0], corners[:, 1], corners[:, 2])
+ax.plot(corners[0:4, 0], corners[0:4, 1], corners[0:4, 2])
+ax.plot(corners[4:8, 0], corners[4:8, 1], corners[4:8, 2])
 ax.plot(side1[:, 0], side1[:, 1], side1[:, 2])
 ax.plot(side2[:, 0], side2[:, 1], side2[:, 2])
 ax.plot(side3[:, 0], side3[:, 1], side3[:, 2])
@@ -45,5 +45,5 @@ ax.plot(side5[:, 0], side5[:, 1], side5[:, 2])
 ax.plot(side6[:, 0], side6[:, 1], side6[:, 2])
 
 plt.show()
-
+"""
 print('hi')
