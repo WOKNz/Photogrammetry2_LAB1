@@ -53,6 +53,11 @@ def drawImageFrame(imageWidth, imageHeight, R, x0, f, scale, ax) :
     ax.scatter(x, y, z, c='r', s=50)
     ax.plot(x, y, z, color='r')
 
+def drawPoints(list_points, ax) :
+
+    ax.scatter(list_points[:,0], list_points[:,1], list_points[:,2], c='b')
+    #ax.plot(x, y, z, color='r')
+
 
 def calcFrameEdgesIn3d(R, x0, f, scale, imageWidth, imageHeight) :
     """
@@ -119,14 +124,14 @@ def drawOrientation(R, x0, scale, ax) :
     ax.plot(xs, ys, zs, c='b')
 
 
-def drawCube(corners):
+def drawCube(corners,ax):
     """
     drawing a 3d cube from 8 corners
     :param corners:
     :return: plt figure of the cube
     """
-    fig_orthographic = plt.figure()
-    ax = fig_orthographic.add_subplot(111, projection='3d')
+    # fig_orthographic = plt.figure()
+    # ax = fig_orthographic.add_subplot(111, projection='3d')
 
     side1 = np.vstack((corners[0, :], corners[3, :]))
     side2 = np.vstack((corners[4, :], corners[7, :]))
@@ -145,8 +150,27 @@ def drawCube(corners):
     ax.plot(side5[:, 0], side5[:, 1], side5[:, 2])
     ax.plot(side6[:, 0], side6[:, 1], side6[:, 2])
 
-    plt.show()
+def set_aspect_equal_3d(ax):
+    """Fix equal aspect bug for 3D plots."""
 
+    xlim = ax.get_xlim3d()
+    ylim = ax.get_ylim3d()
+    zlim = ax.get_zlim3d()
+
+    from numpy import mean
+    xmean = mean(xlim)
+    ymean = mean(ylim)
+    zmean = mean(zlim)
+
+    plot_radius = max([abs(lim - mean_)
+                       for lims, mean_ in ((xlim, xmean),
+                                           (ylim, ymean),
+                                           (zlim, zmean))
+                       for lim in lims])
+
+    ax.set_xlim3d([xmean - plot_radius, xmean + plot_radius])
+    ax.set_ylim3d([ymean - plot_radius, ymean + plot_radius])
+    ax.set_zlim3d([zmean - plot_radius, zmean + plot_radius])
 
 if __name__ == '__main__':
     fig = plt.figure()

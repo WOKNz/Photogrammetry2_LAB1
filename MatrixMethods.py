@@ -316,6 +316,16 @@ def MatrixToLatex(a, name, units='-', decimals=4, tab='  '):
 
     return template.format(**subs)
 
+def LinePlaneCollision(planeNormal, planePoint, rayDirection, rayPoint, epsilon=1e-12):
+    ndotu = planeNormal.dot(rayDirection)
+    if abs(ndotu) < epsilon:
+        raise RuntimeError("no intersection or line is within plane")
+
+    w = rayPoint - planePoint
+    si = -planeNormal.dot(w) / ndotu
+    Psi = w + si * rayDirection + planePoint
+    return Psi
+
 
 if __name__ == "__main__":
     from numpy import pi

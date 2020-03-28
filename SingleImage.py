@@ -82,6 +82,21 @@ class SingleImage(object):
         """
         self.__exteriorOrientationParameters = parametersArray
 
+    @innerOrientationParameters.setter
+    def innerOrientationParameters(self, parametersArray):
+        r"""
+
+        :param parametersArray: the parameters to update the ``self.__innerOrientationParameters``
+
+        **Usage example**
+
+        .. code-block:: py
+
+            self.innerOrientationParameters = parametersArray
+
+        """
+        self.__innerOrientationParameters = parametersArray
+
     @property
     def rotationMatrix(self):
         """
@@ -285,8 +300,14 @@ class SingleImage(object):
         b1 = self.innerOrientationParameters[4]
         b2 = self.innerOrientationParameters[5]
 
-        R = np.array([[a1[0], a2[0]], [b1[0], b2[0]]])
-        T = np.array([[a0[0]], [b0[0]]])
+        if np.isscalar(a0):
+
+            R = np.array([[a1, a2], [b1, b2]])
+            T = np.array([[a0], [b0]])
+
+        else:
+            R = np.array([[a1[0], a2[0]], [b1[0], b2[0]]])
+            T = np.array([[a0[0]], [b0[0]]])
 
         cameraPoints = cameraPoints.T
         #  computing the transformation to the image system
