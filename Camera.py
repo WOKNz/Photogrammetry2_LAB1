@@ -3,7 +3,7 @@ import numpy as np
 
 class Camera(object):
 
-    def __init__(self, focal_length, principal_point, radial_distortions, decentering_distortions, fiducial_marks, sensorSize):
+    def __init__(self, focal_length, principal_point, radial_distortions, decentering_distortions, fiducial_marks, sensor_size):
         """
         Initialize the Camera object
 
@@ -29,7 +29,7 @@ class Camera(object):
         self.__decentering_distortions = decentering_distortions
         self.__fiducial_marks = fiducial_marks
         self.__CalibrationParam = None
-        self.__sensorSize = sensorSize
+        self.__sensor_size = sensor_size
 
     @property
     def focalLength(self):
@@ -85,14 +85,14 @@ class Camera(object):
     @property
     def sensorSize(self):
         """
-        Focal length of the camera
+        Sensor size of the camera
 
-        :return: focal length
+        :return: sensor size
 
         :rtype: float
 
         """
-        return self.__sensorSize
+        return self.__sensor_size
 
     def CameraToIdealCamera(self, camera_points):
         """
@@ -194,7 +194,7 @@ class Camera(object):
         camera system corners of the sensor
         :return:
         """
-        sens = self.__sensorSize
+        sens = self.sensorSize
         a = [sens / 2, -sens / 2, -self.focalLength]
         b = [-sens / 2, -sens / 2, -self.focalLength]
         c = [-sens / 2, sens / 2, -self.focalLength]

@@ -150,8 +150,10 @@ class ImagePair(object) :
         #  defining perspective center in the world system and transforming to camera points
         o1 = np.array(self.__image1.exteriorOrientationParameters[0 :3])
         o2 = np.array(self.__image2.exteriorOrientationParameters[0 :3])
-        camPoints1 = self.__image1.ImageToCamera(imagePoints1)
-        camPoints2 = self.__image2.ImageToCamera(imagePoints2)
+        #camPoints1 = self.__image1.ImageToCamera(imagePoints1)
+        #camPoints2 = self.__image2.ImageToCamera(imagePoints2)
+        camPoints1 = imagePoints1
+        camPoints2 = imagePoints2
 
         groundPoints = []
         e = []

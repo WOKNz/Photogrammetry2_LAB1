@@ -313,7 +313,6 @@ class SingleImage(object):
         #  computing the transformation to the image system
         return (T + np.dot(R, cameraPoints)).T
 
-
     def ImageToCamera(self, imagePoints):
         """
 
@@ -364,8 +363,6 @@ class SingleImage(object):
         R = np.array([[inverse_pars[2], inverse_pars[3]], [inverse_pars[4], inverse_pars[5]]])
 
         return (np.dot(R, imagePoints - T)).T
-
-
 
     def ComputeExteriorOrientation(self, imagePoints, groundPoints, epsilon):
         """
@@ -457,13 +454,6 @@ class SingleImage(object):
 
         return [self.exteriorOrientationParameters, sigmaX, v]
 
-
-
-
-
-
-
-
     def GroundToImage(self, groundPoints):
         """
         Transforming ground points to image points
@@ -509,7 +499,8 @@ class SingleImage(object):
 
             camPoints.append([x, y])
 
-        return self.CameraToImage(np.array(camPoints))
+        #return self.CameraToImage(np.array(camPoints))
+        return(np.array(camPoints))
 
     def ImageToRay(self, imagePoints):
         """
@@ -601,19 +592,21 @@ class SingleImage(object):
 
         return groundPoints
 
-    def castSize(self,z=None):
+    def castSize(self,scale):
         """
         calculates area of the footprint on the ground
         focalLength and sensorsize in mm
         :param z: diffrent hight from Z (for example at top of the square) (m)
         :return: area in mm2 of FOV footprint
         """
-
+        return self.camera.sensorSize * scale
+        """
+        ??? idk what you did here .. its not the same lambda. ???
         if z == None:
             return ((self.exteriorOrientationParameters[2]/self.camera.focalLength*0.001)*self.camera.sensorSize*0.001)
         else:
             return ((z / self.camera.focalLength * 0.001) * self.camera.sensorSize * 0.001)
-
+        """
 
     # ---------------------- Private methods ----------------------
 

@@ -24,7 +24,7 @@ def drawRays(listOfPoints, x0, ax, col) :
         ax.plot(x, y, zs=z, color=col)
 
 
-def drawImageFrame(imageWidth, imageHeight, R, x0, f, scale, ax) :
+def drawImageFrame(imageWidth, imageHeight, R, x0, f, scale, ax):
     """
     Draw image frame in the 3d coordinate system
 
@@ -130,8 +130,6 @@ def drawCube(corners,ax):
     :param corners:
     :return: plt figure of the cube
     """
-    # fig_orthographic = plt.figure()
-    # ax = fig_orthographic.add_subplot(111, projection='3d')
 
     side1 = np.vstack((corners[0, :], corners[3, :]))
     side2 = np.vstack((corners[4, :], corners[7, :]))

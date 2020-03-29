@@ -46,4 +46,3 @@ ax.plot(side6[:, 0], side6[:, 1], side6[:, 2])
 
 plt.show()
 """
-print('hi')
